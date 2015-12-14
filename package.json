@@ -6,7 +6,7 @@
   "scripts": {
     "start": "pm2 start src/index.js --name=\"tp\" --node-args=\"--harmony_destructuring\"",
     "dev": "pm2 --watch --no-daemon start src/index.js --name=\"tp\" --node-args=\"--harmony_destructuring\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --harmony_destructuring test/**/*.js"
   },
   "author": "Taucraft",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "thunkify-wrap": "^1.0.4"
   },
   "devDependencies": {
+    "mocha": "^2.3.4",
     "pm2": "^0.15.10"
   },
   "directories": {
