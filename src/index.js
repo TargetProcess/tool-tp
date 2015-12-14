@@ -1,6 +1,6 @@
 'use strict';
 
-var tool = require('tool-bootstrap');
+var tool = require('buildboard-tool-bootstrap');
 var url = require('url');
 var TP = require('./targetprocess.js');
 
