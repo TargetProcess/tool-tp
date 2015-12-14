@@ -1,0 +1,24 @@
+{
+  "name": "targetprocess-pm-tool",
+  "version": "1.0.0",
+  "description": "Targetprocess PM tool for BuildBoard",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "pm2 start src/index.js --name=\"tp\" --node-args=\"--harmony_destructuring\"",
+    "dev": "pm2 --watch --no-daemon start src/index.js --name=\"tp\" --node-args=\"--harmony_destructuring\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Taucraft",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^3.4.1",
+    "external-ip": "^0.2.4",
+    "koa-request": "^1.0.0",
+    "lodash": "^3.10.1",
+    "mocha": "^2.3.4",
+    "thunkify-wrap": "^1.0.4"
+  },
+  "devDependencies": {
+    "pm2": "^0.15.10"
+  }
+}
