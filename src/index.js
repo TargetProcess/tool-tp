@@ -9,6 +9,7 @@ var rootUrl = process.env["ROOT_URL"] || require('./getIp');
 
 tool.bootstrap(
     {
+        id: 'tp',
         settings: {
             url: {
                 caption: 'Targetprocess URL',
