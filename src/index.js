@@ -9,13 +9,6 @@ var rootUrl = process.env["ROOT_URL"] || require('./getIp');
 
 tool.bootstrap(
     {
-        secret: process.env.SECRET_KEY,
-        mongo: {
-            port: process.env.MONGO_PORT || 3001,
-            db: 'pmtool-tp'
-        },
-        port: process.env.PORT || 3333,
-
         settings: {
             url: {
                 caption: 'Targetprocess URL',
