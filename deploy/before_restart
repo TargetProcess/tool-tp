@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+echo "$USER"
+echo "$SECRET_KEY"
 git clean -fdx
 
 npm install
