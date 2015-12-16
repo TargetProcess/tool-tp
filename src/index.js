@@ -38,6 +38,7 @@ tool.bootstrap(
                 defaultValue: ['UserStory', 'Bug']
             },
 
+
             *validation(config){
                  var tp = new TP(config);
                 return yield tp.validate();
