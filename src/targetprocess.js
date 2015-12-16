@@ -174,10 +174,10 @@ class Targetprocess {
         }
     }
 
-    *createWebHook(accountToken, url, settings) {
+    *createWebHook(toolToken, url, settings) {
 
 
-        var profileName = "Buildboard integration " + md5(accountToken);
+        var profileName = "Buildboard integration " + md5(toolToken);
 
         var profile = {
             "Name": profileName,
