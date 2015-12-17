@@ -80,7 +80,7 @@ const generalSettings = tool.bootstrap(
                 case 'Created':
                 case 'Updated':
                     options = {
-                        url: generalSettings.buildboardUrl + '/api/' + this.passport.user.toolToken + '/tasks',
+                        url: generalSettings.buildboardUrl + '/api/tasks/' + this.passport.user.toolToken,
                         method: 'post',
                         json: task
                     };
@@ -88,7 +88,7 @@ const generalSettings = tool.bootstrap(
                 case 'Deleted':
 
                     options = {
-                        url: generalSettings.buildboardUrl + '/api/' + this.passport.user.toolToken + '/tasks/' + entity.ID,
+                        url: generalSettings.buildboardUrl + '/api/tasks/' + this.passport.user.toolToken + '/' + entity.ID,
                         method: 'delete'
                     };
                     break;
