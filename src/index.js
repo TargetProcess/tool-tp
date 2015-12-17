@@ -65,7 +65,7 @@ const generalSettings = tool.bootstrap(
     },
     ({router})=> {
         router.post('/webhook', function *() {
-            var entity = this.body.Entity;
+            var entity = this.request.body.Entity;
             var task = {
                 id: entity.ID.toString(),
                 type: entity.EntityTypeName.replace('Tp.BusinessObjects.', '').toLowerCase(),
