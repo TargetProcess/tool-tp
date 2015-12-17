@@ -94,7 +94,8 @@ const generalSettings = tool.bootstrap(
                     break;
             }
             if (options) {
-                yield request(options);
+                var result = yield request(options);
+                console.log(result);
                 this.body = {ok: true};
                 this.status = 200;
             }
