@@ -1,5 +1,3 @@
-'use strict';
-
 var tool = require('buildboard-tool-bootstrap');
 var url = require('url');
 var TP = require('./targetprocess.js');
@@ -34,7 +32,7 @@ tool.bootstrap(
 
 
             *validation(config){
-                 var tp = new TP(config);
+                var tp = new TP(config);
                 return yield tp.validate();
             }
         },
@@ -48,19 +46,30 @@ tool.bootstrap(
         },
 
         account: {
-            onCreate(account){
+            *onCreate(account){
                 var tp = new TP(account.config);
-                tp.createWebHook(account.toolToken, 'http://example.com', account.config)
+                yield tp.createWebHook(account.toolToken, 'http://45.55.164.38:3333/webhook');
 
                 console.log('created', account);
             },
-            onDelete(account){
+            *onDelete(account){
+                var tp = new TP(account.config);
+                //tp.deleteWebhook(account.toolToken);
                 console.log('deleted', account);
             },
-            onUpdate(account, oldAccount){
-                console.log('updated', account, oldAccount);
+            *onUpdate(account, oldAccount){
+                // new TP(oldAccount.config).deleteWebhook(oldAccount.toolToken);
+                yield new TP(account.config).createWebHook(account.toolToken, 'http://45.55.164.38:3333/webhook');
+
+                // console.log('updated', account, oldAccount);
             }
         }
+    },
+    router=> {
+        router.post('/webhook', function *() {
+            console.log(this.request.body);
+            this.body = {ok: true};
+        });
     }
 );
 

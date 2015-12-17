@@ -174,8 +174,7 @@ class Targetprocess {
         }
     }
 
-    *createWebHook(toolToken, url, settings) {
-
+    *createWebHook(toolToken, url) {
         var profileName = "Buildboard integration " + md5(toolToken);
 
         var profile = {
@@ -185,11 +184,11 @@ class Targetprocess {
                 "ContentType": "application/json",
                 "UseTemplate": false,
                 "Template": "",
-                "Filter": settings.projects ? _.map(settings.projects, project=>_.isString(project) ? `ProjectName == "${project}"` : `ProjectID == ${project}`).join(' or ') : '',
+                "Filter": this._config.projects ? _.map(this._config.projects, project=>_.isString(project) ? `ProjectName == "${project}"` : `ProjectID == ${project}`).join(' or ') : '',
                 "OnCreate": true,
                 "OnUpdate": true,
                 "OnDelete": true,
-                "Types": settings.types
+                "Types": this._config.types || ["UserStory", "Task", "Bug", "Feature", "Epic"]
             }
         };
 
@@ -201,8 +200,9 @@ class Targetprocess {
             method: 'post',
             json: profile
         };
-
-        yield request(options);
+        console.log(options);
+        var result = yield request(options);
+        console.log(result);
         return true;
     }
 }
