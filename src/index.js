@@ -45,6 +45,18 @@ tool.bootstrap(
                     action: tasks
                 }
             }
+        },
+
+        account: {
+            onCreate(account){
+                console.log('created', account);
+            },
+            onDelete(account){
+                console.log('deleted', account);
+            },
+            onUpdate(account, oldAccount){
+                console.log('updated', account, oldAccount);
+            }
         }
     }
 );
