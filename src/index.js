@@ -76,7 +76,7 @@ const generalSettings = tool.bootstrap(
                 lastModified: entity.ModifyDate
             };
             var options;
-            switch (entity.Modification) {
+            switch (this.request.body.Modification) {
                 case 'Created':
                 case 'Updated':
                     options = {
