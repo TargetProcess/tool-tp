@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 pm2 delete tp
-npm install
 npm update
+npm install
 export NODE_ENV=prod
 npm start
