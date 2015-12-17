@@ -65,7 +65,7 @@ tool.bootstrap(
             }
         }
     },
-    router=> {
+    ({router})=> {
         router.post('/webhook', function *() {
             console.log(this.request.body);
             this.body = {ok: true};
