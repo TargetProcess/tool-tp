@@ -68,6 +68,7 @@ const generalSettings = tool.bootstrap(
             var entity = this.request.body.Entity;
             var task = {
                 id: entity.ID.toString(),
+                url: this.passport.user.config.url + '/entity/' + entity.ID,
                 type: entity.EntityTypeName.replace('Tp.BusinessObjects.', '').toLowerCase(),
                 name: entity.Name,
                 state: {id: entity.EntityStateID, name: entity.EntityStateName},
