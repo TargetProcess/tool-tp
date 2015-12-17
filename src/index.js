@@ -1,6 +1,7 @@
 var tool = require('buildboard-tool-bootstrap');
 var url = require('url');
 var TP = require('./targetprocess.js');
+var request = require('koa-request');
 
 const generalSettings = tool.bootstrap(
     {
@@ -64,13 +65,46 @@ const generalSettings = tool.bootstrap(
     },
     ({router})=> {
         router.post('/webhook', function *() {
-            var config = this.passport.user;
+            var entity = this.body.Entity;
+            var task = {
+                id: entity.ID.toString(),
+                type: entity.EntityTypeName.replace('Tp.BusinessObjects.', '').toLowerCase(),
+                name: entity.Name,
+                state: {id: entity.EntityStateID, name: entity.EntityStateName},
+                users: [],
+                createdAt: entity.CreateDate,
+                lastModified: entity.ModifyDate
+            };
+            var options;
+            switch (entity.Modification) {
+                case 'Created':
+                case 'Updated':
+                    options = {
+                        url: generalSettings.buildboardUrl + '/api/' + this.passport.user.toolToken + '/tasks',
+                        method: 'post',
+                        json: task
+                    };
+                    break;
+                case 'Deleted':
 
-            //console.log(this.request.body);
-            this.body = {ok: true};
+                    options = {
+                        url: generalSettings.buildboardUrl + '/api/' + this.passport.user.toolToken + '/tasks/' + entity.ID,
+                        method: 'delete'
+                    };
+                    break;
+            }
+            if (options) {
+                yield request(options);
+                this.body = {ok: true};
+                this.status = 200;
+            }
+            else {
+                this.body = {ok: false, error: 'unknown modification'};
+                this.status = 500;
+            }
+
         });
-    }
-);
+    });
 
 function *tasks() {
 

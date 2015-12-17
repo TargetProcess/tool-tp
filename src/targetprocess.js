@@ -200,7 +200,6 @@ class Targetprocess {
             method: 'post',
             json: profile
         };
-        console.log(options);
         var result = yield request(options);
         console.log(result);
         return true;
