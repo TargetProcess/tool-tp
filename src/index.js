@@ -47,8 +47,6 @@ const generalSettings = tool.bootstrap(
             *onCreate(account){
                 var tp = new TP(account.config);
                 yield tp.createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
-
-                console.log('created', account);
             },
             *onDelete(account){
                 var tp = new TP(account.config);
@@ -58,8 +56,6 @@ const generalSettings = tool.bootstrap(
             *onUpdate(account, oldAccount){
                 // new TP(oldAccount.config).deleteWebhook(oldAccount.toolToken);
                 yield new TP(account.config).createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
-
-                // console.log('updated', account, oldAccount);
             }
         }
     },
@@ -96,7 +92,6 @@ const generalSettings = tool.bootstrap(
             }
             if (options) {
                 var result = yield request(options);
-                console.log(result);
                 this.body = {ok: true};
                 this.status = 200;
             }

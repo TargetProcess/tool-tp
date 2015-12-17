@@ -201,7 +201,6 @@ class Targetprocess {
             json: profile
         };
         var result = yield request(options);
-        console.log(result);
         return true;
     }
 }
