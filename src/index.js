@@ -49,6 +49,9 @@ tool.bootstrap(
 
         account: {
             onCreate(account){
+                var tp = new TP(account.config);
+                tp.createWebHook(account.toolToken, 'http://example.com', account.config)
+
                 console.log('created', account);
             },
             onDelete(account){
