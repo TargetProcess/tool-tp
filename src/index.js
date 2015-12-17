@@ -2,10 +2,7 @@ var tool = require('buildboard-tool-bootstrap');
 var url = require('url');
 var TP = require('./targetprocess.js');
 
-var rootUrl = process.env["ROOT_URL"] || require('./getIp');
-
-
-tool.bootstrap(
+const generalSettings = tool.bootstrap(
     {
         id: 'tp',
         settings: {
@@ -48,7 +45,7 @@ tool.bootstrap(
         account: {
             *onCreate(account){
                 var tp = new TP(account.config);
-                yield tp.createWebHook(account.toolToken, 'http://45.55.164.38:3333/webhook');
+                yield tp.createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
 
                 console.log('created', account);
             },
@@ -59,7 +56,7 @@ tool.bootstrap(
             },
             *onUpdate(account, oldAccount){
                 // new TP(oldAccount.config).deleteWebhook(oldAccount.toolToken);
-                yield new TP(account.config).createWebHook(account.toolToken, 'http://45.55.164.38:3333/webhook');
+                yield new TP(account.config).createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
 
                 // console.log('updated', account, oldAccount);
             }
@@ -67,7 +64,9 @@ tool.bootstrap(
     },
     ({router})=> {
         router.post('/webhook', function *() {
-            console.log(this.request.body);
+            var config = this.passport.user;
+
+            //console.log(this.request.body);
             this.body = {ok: true};
         });
     }
