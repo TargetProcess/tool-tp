@@ -42,7 +42,7 @@ class Targetprocess {
         let response = yield request(options);
         let body = JSON.parse(response.body);
 
-        return {tasks: body.items || body, next: Targetprocess.buildNext(body.next)};
+        return {items: body.items || body, next: Targetprocess.buildNext(body.next)};
     }
 
     static buildNext(nextLink) {
@@ -87,6 +87,14 @@ class Targetprocess {
             .map(x=>`(${x})`)
             .value()
             .join(' and ');
+    }
+
+    *getUsers(query) {
+        let take = parseInt(query.per_page) || 100;
+        let skip = take * (parseInt(query.page) - 1) || 0;
+        return yield this._request('user', {'id': 'email', 'email': 'email'},
+            '',
+            skip, take);
     }
 
     *getAssignables(query) {
