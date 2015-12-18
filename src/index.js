@@ -3,7 +3,7 @@ var url = require('url');
 var TP = require('./targetprocess.js');
 var request = require('koa-request');
 
-const generalSettings = tool.bootstrap(
+tool.bootstrap(
     {
         id: 'tp',
         settings: {
@@ -43,19 +43,21 @@ const generalSettings = tool.bootstrap(
             }
         },
 
-        account: {
-            *onCreate(account){
-                var tp = new TP(account.config);
-                yield tp.createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
-            },
-            *onDelete(account){
-                var tp = new TP(account.config);
-                //tp.deleteWebhook(account.toolToken);
-                console.log('deleted', account);
-            },
-            *onUpdate(account, oldAccount){
-                // new TP(oldAccount.config).deleteWebhook(oldAccount.toolToken);
-                yield new TP(account.config).createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
+        account: function ({generalSettings}) {
+            return {
+                *onCreate(account){
+                    var tp = new TP(account.config);
+                    yield tp.createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
+                },
+                *onDelete(account){
+                    var tp = new TP(account.config);
+                    //tp.deleteWebhook(account.toolToken);
+                    console.log('deleted', account);
+                },
+                *onUpdate(account, oldAccount){
+                    // new TP(oldAccount.config).deleteWebhook(oldAccount.toolToken);
+                    yield new TP(account.config).createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
+                }
             }
         }
     },

@@ -12,11 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "buildboard-tool-bootstrap": "github:buildboard/tool-bootstrap",
-    "chai": "^3.4.1",
-    "external-ip": "^0.2.4",
     "koa-request": "^1.0.0",
     "lodash": "^3.10.1",
-    "mocha": "^2.3.4",
     "thunkify-wrap": "^1.0.4"
   },
   "devDependencies": {
