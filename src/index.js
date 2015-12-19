@@ -36,12 +36,12 @@ tool.bootstrap(
         },
 
         methods: {
-            '/tasks': {
+            'tasks': {
                 get: {
                     action: requestToResource('getAssignables')
                 }
             },
-            '/users': {
+            'users': {
                 get: {
                     action: requestToResource('getUsers')
                 }
