@@ -152,7 +152,7 @@ class Targetprocess {
 
             errorResult += ': ' + statusCode;
 
-            console.log(loggedUserResponse.body);
+            console.error(loggedUserResponse.body);
             return {error: [errorResult]}
         }
 
