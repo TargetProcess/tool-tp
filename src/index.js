@@ -66,7 +66,7 @@ tool.bootstrap(
             }
         }
     },
-    ({router})=> {
+    ({router, generalSettings})=> {
         router.post('/webhook', function *() {
             var entity = this.request.body.Entity;
             var task = {
