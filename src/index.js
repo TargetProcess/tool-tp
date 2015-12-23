@@ -28,7 +28,6 @@ tool.bootstrap(
                 defaultValue: ['UserStory', 'Bug']
             },
 
-
             *validation(config){
                 var tp = new TP(config);
                 return yield tp.validate();
@@ -36,12 +35,12 @@ tool.bootstrap(
         },
 
         methods: {
-            'tasks': {
+            tasks: {
                 get: {
                     action: requestToResource('getAssignables')
                 }
             },
-            'users': {
+            users: {
                 get: {
                     action: requestToResource('getUsers')
                 }
@@ -52,7 +51,8 @@ tool.bootstrap(
             return {
                 *onCreate(account){
                     var tp = new TP(account.config);
-                    yield tp.createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
+                    yield tp.createWebHook(account.toolToken, generalSettings.url +
+                        '/webhook?token=' + account.toolToken);
                 },
                 *onDelete(account){
                     var tp = new TP(account.config);
@@ -61,9 +61,10 @@ tool.bootstrap(
                 },
                 *onUpdate(account, oldAccount){
                     // new TP(oldAccount.config).deleteWebhook(oldAccount.toolToken);
-                    yield new TP(account.config).createWebHook(account.toolToken, generalSettings.url + '/webhook?token=' + account.toolToken);
+                    yield new TP(account.config).createWebHook(account.toolToken, generalSettings.url +
+                        '/webhook?token=' + account.toolToken);
                 }
-            }
+            };
         }
     },
     ({router, generalSettings})=> {
@@ -92,7 +93,8 @@ tool.bootstrap(
                 case 'Deleted':
 
                     options = {
-                        url: generalSettings.buildboardUrl + '/api/tasks/' + this.passport.user.toolToken + '/' + entity.ID,
+                        url: generalSettings.buildboardUrl + '/api/tasks/' +
+                        this.passport.user.toolToken + '/' + entity.ID,
                         method: 'delete'
                     };
                     break;
@@ -101,8 +103,7 @@ tool.bootstrap(
                 var result = yield request(options);
                 this.body = {ok: true};
                 this.status = 200;
-            }
-            else {
+            } else {
                 this.body = {ok: false, error: 'unknown modification'};
                 this.status = 500;
             }
@@ -120,5 +121,5 @@ function requestToResource(resource) {
             fullUrl.search = undefined;
             this.body.next = url.format(fullUrl);
         }
-    }
+    };
 }

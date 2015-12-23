@@ -6,7 +6,9 @@
   "scripts": {
     "start": "pm2 start src/index.js --name=\"tp\" --node-args=\"--harmony_destructuring\"",
     "dev": "pm2 --watch --no-daemon start src/index.js --name=\"tp\" --node-args=\"--harmony_destructuring\"",
-    "test": "mocha --harmony_destructuring test/**/*.js"
+    "jscs": "jscs ./ --config=./.jscsrc --reporter=console",
+    "jscsfix": "jscs ./ --config=./.jscsrc --reporter=console --fix",
+    "test": "npm run jscs && mocha --harmony_destructuring test/**/*.js"
   },
   "author": "Taucraft",
   "license": "ISC",
