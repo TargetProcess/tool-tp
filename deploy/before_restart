@@ -2,5 +2,4 @@
 pm2 delete tp
 npm update
 npm install
-export NODE_ENV=prod
 npm start
