@@ -4,7 +4,7 @@
   "description": "Targetprocess PM tool for BuildBoard",
   "main": "src/index.js",
   "scripts": {
-    "start": "pm2 start start.json",
+    "start": "pm2 start deploy/tp.json",
     "dev": "pm2 --watch --no-daemon start src/index.js --name=\"tp\" --node-args=\"--harmony_destructuring\"",
     "jscs": "jscs ./ --config=./.jscsrc --reporter=console",
     "jscsfix": "jscs ./ --config=./.jscsrc --reporter=console --fix",
