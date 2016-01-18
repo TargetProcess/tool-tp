@@ -108,6 +108,7 @@ class Targetprocess {
 
         return yield this._request('assignable', {
                 id: 'id.ToString()',
+                wid: 'id.ToString()',
                 type: 'entityType.name.ToLower()',
                 name: 'name',
                 state: {

@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 
 var Targetprocess = require('../src/targetprocess');
 
-describe('pmtool-tp', ()=> {
+describe('tool-tp', ()=> {
     describe('Targetprocess', function () {
 
         var tp = new Targetprocess({});
