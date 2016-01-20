@@ -7,7 +7,7 @@
     "merge_logs"  : true,
     "cwd"         : "/home/pmtool-tp",
     "env": {
-        "NODE_ENV": "prod",
+        "NODE_ENV": "prod"
     }
   }]
 }
