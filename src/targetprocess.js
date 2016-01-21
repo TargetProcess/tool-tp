@@ -106,7 +106,7 @@ class Targetprocess {
         let take = parseInt(query.per_page) || 100;
         let skip = take * (parseInt(query.page) - 1) || 0;
 
-        return yield this._request('assignable', {
+        let result = yield this._request('assignable', {
                 id: 'id.ToString()',
                 wid: 'id.ToString()',
                 type: 'entityType.name.ToLower()',
@@ -122,6 +122,9 @@ class Targetprocess {
             where,
             skip, take);
 
+        result.items.forEach(i => i.url = `${this._url}/entity/${i.id}`);
+
+        return result;
     }
 
     *validate() {
