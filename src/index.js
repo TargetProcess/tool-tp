@@ -3,9 +3,11 @@ var url = require('url');
 var TP = require('./targetprocess.js');
 var request = require('koa-request');
 
+var toolSettings = require('./config');
 tool.bootstrap(
     {
         id: 'tp',
+        toolSettings,
         settings: {
             url: {
                 caption: 'Targetprocess URL',
